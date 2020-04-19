@@ -107,7 +107,7 @@ std::vector<ExchangePair> disjoin(const EdgeSet &current_edges, const EdgeSet &c
     ExchangePair base{std::move(current), std::move(candidate)};
     std::vector<ExchangePair> exchange_pairs;
     while (not base.empty()) {
-        exchange_pairs.push_back(std::move(disjoin(base)));
+        exchange_pairs.push_back(disjoin(base));
     }
     return exchange_pairs;
 }

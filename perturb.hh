@@ -97,7 +97,9 @@ inline Tour random_restart(const PointSet &point_set, const point_quadtree::Doma
     for (primitives::point_id_t i{0}; i < n; ++i) {
         random_order[i] = i;
     }
-    std::random_shuffle(std::begin(random_order), std::end(random_order));
+    static std::random_device device; // will be used to obtain a seed for the random number engine
+    static std::mt19937 generator(device()); // standard mersenne_twister_engine seeded with random_device.
+    std::shuffle(std::begin(random_order), std::end(random_order), generator);
     Tour tour(domain, random_order);
     hill_climb::hill_climb(hill_climber, tour, kmax);
     return tour;
@@ -114,7 +116,9 @@ inline KMove random_section(const std::vector<primitives::point_id_t> &ordered_p
     }
     // first and last point in randomized sequence will not be shuffled,
     // but connected edges will still be deleted.
-    std::random_shuffle(std::next(std::begin(random_order)), std::prev(std::end(random_order)));
+    static std::random_device device; // will be used to obtain a seed for the random number engine
+    static std::mt19937 generator(device()); // standard mersenne_twister_engine seeded with random_device.
+    std::shuffle(std::next(std::begin(random_order)), std::prev(std::end(random_order)), generator);
 
     KMove kmove;
     for (auto it = std::cbegin(random_order); it != std::prev(std::cend(random_order)); ++it) {
@@ -143,7 +147,9 @@ inline std::vector<primitives::point_id_t> one_edge_per_cycle(const MulticycleTo
     for (auto &p : points) {
         p = i++;
     }
-    std::random_shuffle(std::begin(points), std::end(points));
+    static std::random_device device; // will be used to obtain a seed for the random number engine
+    static std::mt19937 generator(device()); // standard mersenne_twister_engine seeded with random_device.
+    std::shuffle(std::begin(points), std::end(points), generator);
     std::vector<primitives::point_id_t> selections(tour.cycles(), constants::INVALID_POINT);
     size_t selected{0};
     for (const auto &p : points) {

@@ -32,7 +32,9 @@ RandomFinder::search_neighborhood(primitives::point_id_t p)
     {
         return filtered;
     }
-    std::random_shuffle(std::begin(filtered), std::end(filtered));
+    static std::random_device device; // will be used to obtain a seed for the random number engine
+    static std::mt19937 generator(device()); // standard mersenne_twister_engine seeded with random_device.
+    std::shuffle(std::begin(filtered), std::end(filtered), generator);
     filtered.resize(samples);
     return filtered;
 }

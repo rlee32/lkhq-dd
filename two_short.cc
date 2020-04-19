@@ -82,7 +82,9 @@ std::set<edge::Edge> get_short_edges(const PointSet &point_set, const Tour &tour
 }
 
 KMove make_perturbation(const Tour &tour, std::vector<edge::Edge> &short_edges) {
-    std::random_shuffle(std::begin(short_edges), std::end(short_edges));
+    static std::random_device device; // will be used to obtain a seed for the random number engine
+    static std::mt19937 generator(device()); // standard mersenne_twister_engine seeded with random_device.
+    std::shuffle(std::begin(short_edges), std::end(short_edges), generator);
     KMove large_kmove;
     std::unordered_set<primitives::point_id_t> removed;
     std::set<edge::Edge> added;

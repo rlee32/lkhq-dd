@@ -1,11 +1,11 @@
-CXX = g++-8
+CXX = g++
 CXX_FLAGS = -std=c++17
 CXX_FLAGS += -Wuninitialized -Wall -Wextra -Werror -pedantic -Wfatal-errors # source code quality.
 CXX_FLAGS += -O3 -ffast-math # non-debug version.
 #CXX_FLAGS += -O0 -g # debug version.
 CXX_FLAGS += -I./ # include paths.
 
-LINK_FLAGS = -lstdc++fs # filesystem
+LINK_FLAGS = # -lstdc++fs # filesystem
 
 SRCS = k-opt.cc tour.cc \
 	kmove.cc \

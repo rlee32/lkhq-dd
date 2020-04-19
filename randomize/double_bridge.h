@@ -39,7 +39,7 @@ std::vector<primitives::sequence_t> select_edges_to_remove(primitives::point_id_
 
 KMove swap(Tour& tour) {
     const auto removal = select_edges_to_remove(tour.size());
-    const decltype(removal[0]) n = tour.size();
+    decltype(removal[0]) n = tour.size();
     std::vector<primitives::sequence_t> ends{{
         (removal[2] + 1) % n,
         (removal[3] + 1) % n,

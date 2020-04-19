@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <random>
 #include <primitives.hh>
 
@@ -26,7 +27,9 @@ inline std::vector<primitives::sequence_t> random_set(primitives::sequence_t sta
         candidates[s] = s;
     }
     const auto &begin = std::begin(candidates);
-    std::random_shuffle(begin, std::end(candidates));
+    static std::random_device device; // will be used to obtain a seed for the random number engine
+    static std::mt19937 generator(device()); // standard mersenne_twister_engine seeded with random_device.
+    std::shuffle(begin, std::end(candidates), generator);
     std::vector<primitives::sequence_t> selection(begin, begin + k);
     std::sort(std::begin(selection), std::end(selection));
     return selection;
