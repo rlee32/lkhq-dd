@@ -79,6 +79,7 @@ int main(int argc, const char** argv)
             if (save_dir) {
                 const auto &save_path = *save_dir / (save_prefix + '_' + std::to_string(new_length) + ".tour");
                 fileio::write_ordered_points(tour.order(), save_path);
+                std::cout << "saved tour to " << save_path << std::endl;
             }
             best_length = new_length;
         }
@@ -93,7 +94,7 @@ int main(int argc, const char** argv)
     auto new_length = hill_climb::hill_climb(hill_climber, tour, kmax);
     if (new_length < best_length) {
         best_length = new_length;
-        std::cout << "improvement: " << new_length << std::endl;
+        std::cout << "new improved length: " << new_length << std::endl;
     }
     write_if_better(new_length);
 
