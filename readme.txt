@@ -1,3 +1,5 @@
+Deprecated: this includes perturbations and tour merging. I am moving towards maintaining just the hill climbing bit, and factoring out the perturbation and tour merging as python scripts.
+
 Code style disclaimer: the style can be a little inconsistent, because I am migrating to a style closer to the Google C++ Style Guide.
 See "Style notes" for more detail.
 
